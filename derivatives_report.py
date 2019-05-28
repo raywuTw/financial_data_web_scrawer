@@ -168,12 +168,12 @@ def iteration(arr, start_from=0, end_to=9999):
             trigger(myID, myYYY, myMM)
 
 def connection_info():
-    ipstr=socket.gethostbyname(socket.gethostname())
-    if ipstr=='172.27.110.104':
-        conn_info='localhost'
-    else:
-        conn_info='172.27.110.104'  #this is Jack's pc
-
+    #ipstr=socket.gethostbyname(socket.gethostname())
+    #if ipstr=='172.27.110.104':
+    #    conn_info='localhost'
+    #else:
+    #    conn_info='172.27.110.104'  #this is Jack's pc
+    conn_info='localhost'
     return conn_info
 lastmon=datetime.datetime.today()-datetime.timedelta(days=20)
 myYYY=str(int(lastmon.strftime("%Y"))-1911)
@@ -185,13 +185,13 @@ conn=psycopg2.connect(host=host_str,port='5432',database='postgres',user='quant'
 cur=conn.cursor()
 
 ipstr=socket.gethostbyname(socket.gethostname())
-if ipstr=='172.27.110.104':
-    arr=get_all_code('上櫃股票代碼')
-    iteration(arr, 1001, 9999)		# for debug purpose
-elif ipstr=='172.27.110.105':
-    arr=get_all_code('上市股票代碼')
-    iteration(arr, 1101, 4500)  	# for debug purpose
-elif ipstr=='172.27.111.34':
+#if ipstr=='172.27.110.104':
+#    arr=get_all_code('上櫃股票代碼')
+#    iteration(arr, 1001, 9999)		# for debug purpose
+#elif ipstr=='172.27.110.105':
+#    arr=get_all_code('上市股票代碼')
+#    iteration(arr, 1101, 4500)  	# for debug purpose
+#elif ipstr=='172.27.111.34':
     arr=get_all_code('上市股票代碼')
     iteration(arr, 4500, 9999)  	# for debug purpose
 
