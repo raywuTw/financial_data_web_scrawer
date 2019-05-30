@@ -114,18 +114,20 @@ def start_level(sp):
         print('Already exists!!!')
         driver.close()
 
+        
 def trigger(myID, myYYY, myMM):
-    if socket.gethostbyname(socket.gethostname())=='172.27.110.104':	#Jack's pc
+ #   if socket.gethostbyname(socket.gethostname())=='172.27.110.104':	#Jack's pc
         ipath='D:\\Python36\\phantomjs.exe'
-    elif socket.gethostbyname(socket.gethostname())=='172.27.111.34': 	#Jay's pc
-        ipath='C:\\Program Files\\Python35\\Scripts\\phantomjs.exe'
-    elif socket.gethostbyname(socket.gethostname())=='172.27.110.105': 	#Allen's pc
-        ipath='D:\\Python\\Python35\\phantomjs.exe'
+  #  elif socket.gethostbyname(socket.gethostname())=='172.27.111.34': 	#Jay's pc
+   #     ipath='C:\\Program Files\\Python35\\Scripts\\phantomjs.exe'
+   # elif socket.gethostbyname(socket.gethostname())=='172.27.110.105': 	#Allen's pc
+   #     ipath='D:\\Python\\Python35\\phantomjs.exe'
+    ipath='D:\\financial_data_web_scrawer\\chromedriver.exe'
 		
     global driver
     driver=webdriver.PhantomJS(ipath,service_args=['--ignore-ssl-errors=true','--ssl-protocol=TLSv1'])
 
-    driver=webdriver.Firefox()
+    #driver=webdriver.Firefox()
     driver.get("http://mops.twse.com.tw/mops/web/t15sf")
 
     driver.find_element_by_id('co_id').send_keys(myID)
@@ -156,6 +158,7 @@ def get_all_code(strName):
     conn1.close()
     return arr
 	
+#add id and date to trrigger 
 def iteration(arr, start_from=0, end_to=9999):
     lastmon=datetime.datetime.today()-datetime.timedelta(days=20)
     myYYY=str(int(lastmon.strftime("%Y"))-1911)
@@ -166,7 +169,7 @@ def iteration(arr, start_from=0, end_to=9999):
         myID=arr[i][0]
         if int(myID)>=start_from and int(myID)<=end_to:
             trigger(myID, myYYY, myMM)
-
+# connect to local db
 def connection_info():
     #ipstr=socket.gethostbyname(socket.gethostname())
     #if ipstr=='172.27.110.104':
