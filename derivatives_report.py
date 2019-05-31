@@ -183,6 +183,7 @@ myYYY=str(int(lastmon.strftime("%Y"))-1911)
 myMM=lastmon.strftime("%m")
 myID=''
 
+#assign once and use everywhere 
 host_str=connection_info()
 conn=psycopg2.connect(host=host_str,port='5432',database='postgres',user='quant',password='quant')
 cur=conn.cursor()
@@ -196,7 +197,9 @@ ipstr=socket.gethostbyname(socket.gethostname())
 #    iteration(arr, 1101, 4500)  	# for debug purpose
 #elif ipstr=='172.27.111.34':
     arr=get_all_code('上市股票代碼')
+    
+    #arr format is [['2353',xxxx],[2317,xxxx]]
     iteration(arr, 4500, 9999)  	# for debug purpose
-
+#close connection before exiting code
 cur.close()
 conn.close()
