@@ -23,7 +23,8 @@ def message_file(path_file):
 def main(argv):
     global msg
     msg = MIMEMultipart('alternative')
-    email_smtp='email.esunbank.com.tw'
+    email_smtp='smtp.gmail.com'
+    
     you=''
 
     msg['Subject'] = '[Auto-Message]'
@@ -51,10 +52,12 @@ def main(argv):
                     you=you + mto + '@' + email_smtp + ';'
 					
     if you=='':
-	    you='jay-18019@' + email_smtp
+	    you='wussster@gmail.com'
 
-    msg['To'] = you	
-    s = smtplib.SMTP(email_smtp)
+    msg['To'] = 'wussster@gmail.com'	
+    s = smtplib.SMTP(email_smtp,587)
+    s.starttls()
+    s.login('wussster@gmail.com','')
     s.send_message(msg)
     s.quit()
     print('Sending email successfully!!')			
